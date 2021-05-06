@@ -95,6 +95,19 @@ Attrs HtmlParser::parseAttributes() {
 
 std::pair<const std::string &, const std::string &>
 HtmlParser::parseAttribute() {
+  /*
+  Adding this line will make it work...
+
+  ERROR Message:
+  toy-browser $ bazel-bin/src/browser
+  INFO: ****** Parsing HTML ******
+  browser(17669,0x119e12e00) malloc: can't allocate region
+  :*** mach_vm_map(size=140732659580928, flags: 100) failed (error code=3)
+  browser(17669,0x119e12e00) malloc: *** set a breakpoint in malloc_error_break to debug
+  libc++abi: terminating with uncaught exception of type std::bad_alloc: std::bad_alloc
+  Abort trap: 6
+  */
+  logger::info("");
   std::string name = parseWord();
   assert(consumeChar() == '=');
   std::string value = parseAttrValue();
