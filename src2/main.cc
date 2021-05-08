@@ -109,6 +109,89 @@ void useLocalOrGlovalValFunc() {
   cout << ::str;
   cout << str;
 }
+
+class PointClass {
+  public:
+  string str;
+  PointClass(string str);
+};
+
+PointClass::PointClass(string str) {
+  PointClass::str = str;
+}
+
+void usePointClass() {
+  PointClass *pa, pb[2] = {PointClass("A\n"), PointClass("B\n")};
+  pa = &pb[0];
+  cout << pa->str;
+  cout << (pa+1)->str;
+};
+
+void useRef() {
+  int i = 100;
+  int &ref = i;
+  ref++;
+
+  cout << i << ":" << ref << "\n";
+  cout << &i << ":" << &ref << "\n";
+};
+
+class Ref {
+  public:
+    string str;
+} r;
+
+void useClassRef() {
+  Ref &obj = r;
+  r.str = "B";
+  cout << obj.str;
+}
+
+Kitty passClassObjFunc(Kitty *obj) {
+  cout << obj->getPoint();
+  Kitty obj2(obj->getPoint());
+  return obj2;
+}
+
+void useClassKittyArgs() {
+  Kitty obj(1);
+  Kitty obj2 = passClassObjFunc(&obj);
+}
+
+inline int getSalesPrice(int x) {
+  return x + (int)(x * 0.05);
+}
+
+class InlineClass {
+  public:
+    int getSalesPrice(int x) {
+      return x + (int)(x * 0.05);
+    }
+};
+
+void useInlineFunc() {
+  cout << getSalesPrice(100);
+  InlineClass ic;
+  cout << ic.getSalesPrice(100);
+}
+
+class ThisClass {
+  public:
+    string str;
+    string getStr();
+};
+
+string ThisClass::getStr() {
+  return this->str;
+};
+
+void useThisClass() {
+  ThisClass tc;
+  tc.str = "A";
+  cout << tc.getStr();
+}
+
 int main(int argc, char **argv) {
+  useThisClass();
   return 0;
 }
