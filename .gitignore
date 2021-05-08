@@ -1,4 +1,5 @@
 .*
+!.clang-format
 
 # Compiled Dynamic libraries
 *.so

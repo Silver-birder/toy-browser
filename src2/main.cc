@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 void printMyMessageToOut() {
@@ -90,6 +91,24 @@ Sitty::Sitty(char *ch) {
 //  cout << obj.str;
 //}
 
+class Hoge {
+public:
+  string str;
+  void print(string str);
+};
+
+void Hoge::print(string str) {
+  cout << Hoge::str;
+  cout << str;
+}
+
+string str = "Global Variable";
+
+void useLocalOrGlovalValFunc() {
+  string str = "Local Variable";
+  cout << ::str;
+  cout << str;
+}
 int main(int argc, char **argv) {
   return 0;
 }
