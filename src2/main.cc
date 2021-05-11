@@ -14,6 +14,6 @@ int main(int argc, char **argv) {
   const std::string source = io::readFile(FLAGS_html_file);
   const std::string css = io::readFile(FLAGS_css_file);
 
-  std::cout << html_parser::parseHtml(source);
+  html_parser::parseHtml(source);
   return 0;
 }

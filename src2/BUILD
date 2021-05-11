@@ -3,13 +3,17 @@ cc_binary(
         srcs=[
                 "main.cc",
                 "util.h",
-                "parse/html.h",
                 "parse/html.cc",
-                "parse/parser.h",
+                "parse/html.h",
                 "parse/parser.cc",
-                "constants.h"
+                "parse/parser.h",
+                "constants.h",
+                "dom.cc",
+                "dom.h",
         ],
         deps = [
                 "@com_github_gflags_gflags//:gflags",
+                "@com_google_absl//absl/strings",
+                "@com_google_absl//absl/strings:str_format",
         ],
 )
