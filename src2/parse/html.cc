@@ -135,11 +135,25 @@ std::vector<std::unique_ptr<dom::Node>> HtmlParser::parseNodes() {
   return nodes;
 }
 
+void nest(std::reference_wrapper<dom::Node> node) {
+  std::cout << node.get().toLogStr();
+  std::vector<std::reference_wrapper<dom::Node>> children = node.get().get_children();
+  for(auto child: children) {
+    std::cout << child.get().toLogStr() << "\n";
+    nest(child);
+  }
+}
+
 std::unique_ptr<dom::Node> parseHtml(const std::string &source) {
   logger::info("****** Parsing HTML ******");
   HtmlParser parser(0, source);
   // We assume there is only one root node and thus return the first node
   // in the top-level of the tree.
-  return std::move(parser.parseNodes()[0]);
+  std::vector<std::unique_ptr<dom::Node>> nodes = parser.parseNodes();
+  // std::vector<std::reference_wrapper<dom::Node>> children = nodes[0]->get_children();
+  // for(auto child: children) {
+  //   nest(child);
+  // }
+  return std::move(nodes[0]);
 }
 }  // namespace html_parser
