@@ -13,7 +13,6 @@ int main(int argc, char **argv) {
 
   const std::string source = io::readFile(FLAGS_html_file);
   const std::string css = io::readFile(FLAGS_css_file);
-
-  html_parser::parseHtml(source);
+  std::unique_ptr<dom::Node> root = html_parser::parseHtml(source);
   return 0;
 }
