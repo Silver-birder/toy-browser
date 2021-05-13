@@ -80,7 +80,7 @@ Attrs HtmlParser::parseAttributes() {
     consumeWhitespace();
     try {
       std::pair<const std::string &, const std::string &> kv = parseAttribute();
-      attrs[kv.first.c_str()] = kv.second.c_str();
+      attrs[kv.first.data()] = kv.second.data();
     } catch(std::bad_alloc& err) {
       std::cout << err.what() << std::endl;
       std::cout << "\n";
