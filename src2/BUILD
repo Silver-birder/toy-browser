@@ -3,6 +3,8 @@ cc_binary(
         srcs=[
                 "main.cc",
                 "util.h",
+                "parse/css.cc",
+                "parse/css.h",
                 "parse/html.cc",
                 "parse/html.h",
                 "parse/parser.cc",

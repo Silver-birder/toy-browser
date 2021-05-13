@@ -74,12 +74,17 @@ void HtmlParser::parseComment() {
 
 Attrs HtmlParser::parseAttributes() {
   consumeWhitespace();
-  Attrs attrs;
+  Attrs attrs = {};
   // Until we reach a closing, parse attributes
   while (nextChar() != '>' && !startsWith("/>")) {
     consumeWhitespace();
-    std::pair<const std::string &, const std::string &> kv = parseAttribute();
-    attrs[kv.first] = kv.second;
+    try {
+      std::pair<const std::string &, const std::string &> kv = parseAttribute();
+      attrs[kv.first] = kv.second;
+    } catch(std::bad_alloc& err) {
+      std::cout << err.what() << std::endl;
+      std::cout << "\n";
+    }
     consumeWhitespace();
   }
   return attrs;
