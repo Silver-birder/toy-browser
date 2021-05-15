@@ -21,5 +21,8 @@ int main(int argc, char **argv) {
 
   text_render::FontRegistry *registry =　text_render::FontRegistry::getInstance();
   std::unique_ptr<style::StyledNode> styled_node = style::styleTree(*root, stylesheet, style::PropertyMap());
+
+  styled_node.reset();
+  registry->clear();
   return 0;
 }
