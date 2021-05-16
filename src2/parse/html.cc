@@ -1,5 +1,6 @@
 #include "html.h"
 
+#include <array>
 #include <assert.h>
 #include <vector>
 
@@ -78,27 +79,23 @@ Attrs HtmlParser::parseAttributes() {
   // Until we reach a closing, parse attributes
   while (nextChar() != '>' && !startsWith("/>")) {
     consumeWhitespace();
-    try {
-      std::pair<std::string, std::string> kv = parseAttribute();
-      attrs[kv.first] = kv.second;
-    } catch(std::bad_alloc& err) {
-      std::cout << err.what() << std::endl;
-      std::cout << "\n";
-    }
+    std::array<std::string, 2> attr = parseAttribute();
+    attrs[attr[0]] = attr[1];
     consumeWhitespace();
   }
   return attrs;
 }
 
-std::pair<const std::string &, const std::string &>
-HtmlParser::parseAttribute() {
+std::array<std::string, 2> HtmlParser::parseAttribute() {
   std::string name = parseWord();
   assert(consumeChar() == '=');
   std::string value = parseAttrValue();
   absl::RemoveExtraAsciiWhitespace(&name);
   absl::RemoveExtraAsciiWhitespace(&value);
-  std::pair<std::string, std::string> kv(name, value);
-  return kv;
+  std::array<std::string, 2> result;
+  result[0] = name;
+  result[1] = value;
+  return result;
 }
 
 std::string HtmlParser::parseAttrValue() {

@@ -1,6 +1,7 @@
 #ifndef HTML_PARSER_H
 #define HTML_PARSER_H
 
+#include <array>
 #include <functional>
 #include <iostream>
 
@@ -15,7 +16,7 @@ class HtmlParser : public BaseParser {
   void parseComment();
   std::vector<std::unique_ptr<dom::TextNode>> parseTextNodes();
   Attrs parseAttributes();
-  std::pair<const std::string &, const std::string &> parseAttribute();
+  std::array<std::string, 2> parseAttribute();
   std::string parseWord();
   std::string parseAttrValue();
 
