@@ -79,8 +79,8 @@ Attrs HtmlParser::parseAttributes() {
   while (nextChar() != '>' && !startsWith("/>")) {
     consumeWhitespace();
     try {
-      std::pair<const std::string &, const std::string &> kv = parseAttribute();
-      attrs[kv.first.data()] = kv.second.data();
+      std::pair<std::string, std::string> kv = parseAttribute();
+      attrs[kv.first] = kv.second;
     } catch(std::bad_alloc& err) {
       std::cout << err.what() << std::endl;
       std::cout << "\n";
